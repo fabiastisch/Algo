@@ -38,6 +38,10 @@ public class pathsv4 {
 
     public static BigInteger funktion(int x, int y, int dir){
 
+        if (n == -1){
+            return BigInteger.ONE;
+        }
+
         if (x == n && y == 0){
             return BigInteger.ONE;
         }
