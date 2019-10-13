@@ -19,14 +19,17 @@ public class pathsv4 {
             System.err.println("NumberFormatExeption");
         }
 
+
+
         //+ "|" + 0
 
+        System.out.println(" for n = " + n + " ");
+        n--;
         BigInteger funktion = funktion(0, 0, 0);   //START
-        BigInteger anzahlDerPfade = speicher.get("" + n + "|" + 0 );
-        System.out.println(anzahlDerPfade);
+
         System.out.println("Anzah der Pfade: " + funktion);
 
-        System.out.println("\n\n " + speicher);
+
     }
 
 
@@ -58,13 +61,23 @@ public class pathsv4 {
 
     private static BigInteger nachrechts(int x, int y, int dir) {
         if (x + y < n && dir != -1) {
-            return funktion(x + 1, y, 0);
+            if (speicher.containsKey(x+"|"+y)){
+                return speicher.get(x+"|"+y);
+            }else {
+                speicher.put(x+"|"+y, funktion(x+1,y,0));
+            }
+
+            return speicher.get(x+"|"+y);
         }else return BigInteger.ZERO;
     }
 
     private static BigInteger nachoben(int x, int y, int dir) {
         if (x-y > 0) {
-            return funktion(x - 1, y + 1, 1);
+            if (speicher.containsKey(x+"|"+y)){
+                return speicher.get(x+"|"+y);
+            }else {
+                return funktion(x - 1, y + 1, 1);
+            }
         }else return BigInteger.ZERO;
     }
 
