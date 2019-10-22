@@ -25,37 +25,34 @@ public class PathNodes {
                 System.err.println("NumberFormatExeption");
             }
 
-            System.out.println(Arrays.toString(nodes(n, 0, 0)));
+            for (int i = 0; i < n; i++) {
 
-           //System.out.println(memory.values());
-
-            Set<String> e;
-
-            System.out.println("\n\n\n");
+                BigInteger[] solution = nodes(n, 0, 0);
+                System.out.println("Für n = " + i + "\n Die Anzahl der verschiedenen Pfade betragen: \n\t " + solution[0]);
+                System.out.println("Die Anzahl der summierten Punkte über sämtliche Pfade beträgt: \n\t " + solution[1]);
 
 
+            }
+            System.out.println("\n\n\n END OF FILE");
+
+
+
+            /* Set<String> e;
             Iterator it = memory.keySet().iterator();
-
            for (BigInteger[] el : memory.values()){
-
                System.out.println(it.next());
-
                System.out.println(Arrays.toString(el));
 
+           }*/
 
 
-
-
-           }
-
-           // System.out.println(summ);
 
         }while (n!=-1);
     }
 
     static BigInteger[] nodes(int x, int y, int t){
 
-        if (x < 0 || y < 0 || y > x){
+        if (x < 0 || y < 0 || y > x) { // Sollte nie true sein,  TODO: kann evtl. gelöscht werden
             System.err.println("Fehler \t"+ + ++i  + "\t" + ""+x+"|"+y+"|"+t);
 
             return new BigInteger[]{BigInteger.ZERO, BigInteger.ZERO};
@@ -67,35 +64,33 @@ public class PathNodes {
         if (memory.containsKey(s))return memory.get(s);
 
         BigInteger paths = BigInteger.ZERO;
-        BigInteger nodes = BigInteger.ONE;
+        BigInteger nodes = BigInteger.ZERO;
 
 
-       // System.out.println("Nach links  "+s);
+
         if (y - x < 0) {
             BigInteger[] left = nodes(x - 1, y, 1);
            paths = paths.add(left[0]);  // nach links
            nodes = nodes.add(left[1]);
         }
         if (t != 1 && x-y > 1){
-         //   System.out.println("Nach links oben  "+s);
+
             BigInteger[] leftTop =nodes(x-1,y+1,2);
             paths = paths.add(leftTop[0]); // Nach links oben
             nodes = nodes.add(leftTop[1]);
         }
         if ((t == 1 || t == 3) && y != 0) {
-          //  System.out.println("Nach rechts unten  "+s);
+
             BigInteger[] rightBot = nodes(x+1,y-1,3);
             paths = paths.add(rightBot[0]); // Nach rechts unten
             nodes = nodes.add(rightBot[1]);
         }
 
-        nodes = nodes.add(paths.subtract(BigInteger.ONE));
+        nodes = nodes.add(paths);
+
 
         memory.put(s, new BigInteger[]{paths, nodes});
 
-
-
-        if (paths.equals(BigInteger.ZERO))nodes = BigInteger.ZERO;
 
         return new BigInteger[]{paths, nodes};
     }
