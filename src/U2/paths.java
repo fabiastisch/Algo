@@ -1,3 +1,5 @@
+package U2;
+
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -10,16 +12,16 @@ public class paths {
 
 
 
-      Scanner scanner = new Scanner(System.in);
+    Scanner scanner = new Scanner(System.in);
 
-      int n;
+    int n;
 
-      try {
-        n = Integer.parseInt(scanner.nextLine());
-      } catch (NumberFormatException e) {
-        n = 0;
-        System.err.println("NumberFormatExeption");
-      }
+    try {
+      n = Integer.parseInt(scanner.nextLine());
+    } catch (NumberFormatException e) {
+      n = 0;
+      System.err.println("NumberFormatExeption");
+    }
 
 
 
@@ -28,7 +30,7 @@ public class paths {
     System.out.println(anzahlDerPfade);
 
     System.out.println(speicher);
-   // System.out.println(speicher.size());
+    // System.out.println(speicher.size());
 
   }
 
@@ -78,4 +80,3 @@ public class paths {
 
 
 }
-

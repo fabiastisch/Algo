@@ -1,17 +1,22 @@
+package U3;
+
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Muenzwechsel {
-                        // 0   1  2  3  4
+public class MuenzwechselV2 implements Runnable {
     static int coins [] = {1 , 2, 5, 9, 11};
     static int n = coins.length; // Anzahl der Münzen
     static int g;
     static HashMap<Double, BigInteger> speicher = new HashMap<>();
 
+    public MuenzwechselV2(int g) {
+        System.out.println("Den Betrag " + g + " kann man auf " + w(g,n-1) + " verschiedene Arten wechseln.");
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
         do {
 
 
@@ -22,19 +27,12 @@ public class Muenzwechsel {
                 System.err.println("NumberFormatExeption");
             }
 
-            System.out.println("Den Betrag " + g + " kann man auf " + w(g,n-1) + " verschiedene Arten wechseln.");
+            new MuenzwechselV2(g);
+
 
         }while (g !=0);
-
     }
-
     static BigInteger w(int g, int i){
-        /*
-        return g < 0 ? BigInteger.ZERO :
-            i == 0 ? (g % coins[0] == 0 ? BigInteger.ONE : BigInteger.ZERO) :
-                    speicher.containsKey(Double.valueOf(g +"."+ i))? speicher.get(Double.valueOf(g +"."+ i)) :
-
-                            speicher.put(Double.valueOf(g +"."+ i), w(g,i-1).add(w(g-coins[i],i)));*/
 
         if (g < 0){
             return BigInteger.ZERO;
@@ -47,18 +45,22 @@ public class Muenzwechsel {
         if (speicher.containsKey(Double.valueOf(g+"."+i))){
             return speicher.get(Double.valueOf(g+"."+i));
         }else {
-           // BigInteger temp1 = w(g,i-1);
             speicher.put(Double.valueOf(g+"."+(i-1)),w(g,i-1));
             speicher.put(Double.valueOf((g-coins[i])+"."+i),w(g-coins[i],i));
 
-            //BigInteger temp2 = w(g-coins[i],i);
-          //  speicher.put(Double.valueOf(g+"."+i),temp1.add(temp2));
             speicher.put(Double.valueOf(g+"."+i),speicher.get(Double.valueOf(g+"."+(i-1))).add(speicher.get(Double.valueOf((g-coins[i])+"."+i))));
             return speicher.get(Double.valueOf(g+"."+i));
         }
+    }
 
-
-
+    @Override
+    public void run() {
+        try {
+            while (true) {
+                System.out.println((new Date().toString()));
+                Thread.sleep(60000);
+            }
+        } catch (InterruptedException ex) {}
     }
 
 }
