@@ -1,6 +1,8 @@
 package U4;
 
+import java.awt.*;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Scanner;
 
 /**
@@ -16,40 +18,80 @@ import java.util.Scanner;
  */
 
 public class PermTwoSeven {
-    static int n;
+    private int n;
+    private int[] a, even, odd;
+    ; // a Arbeitsarray
+    private int max; // maximaler Index
+    private boolean iseven;
 
+    private Collection<int[]> solutions;
+
+
+    public PermTwoSeven(int n) {
+        a = new int[n]; // Indices: 0 .. n-1
+        max = n - 1; // Maximaler Index
+        for (int i = 0; i <= max; ) a[i] = ++i; // a fuellen, von 1 - max
+
+        if (n % 2 == 0) {
+            iseven = true;
+        }
+        if (iseven) {
+            System.out.println("Even");
+            even = new int[n / 2];
+            odd = new int[n / 2];
+        } else {
+            System.out.println("odd");
+            even = new int[n / 2 - 1];
+            odd = new int[n / 2 + 1];
+        }
+
+    }
 
     public static void main(String[] args) {
+        int nn;
         Scanner scanner = new Scanner(System.in);
 
         do {
             try {
-                n = Integer.parseInt(scanner.nextLine());
+                nn = Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException e) {
-                n = -1;
+                nn = -1;
                 System.err.println("NumberFormatExeption");
             }
-            Perm p = new Perm(n);
+            /*Perm p = new Perm(nn);
             int[]c;
 
             while ((c = p.getNext()) != null){
                 System.out.println(arrStr(c));
-            }
+            }*/
+            PermTwoSeven p = new PermTwoSeven(nn);
+            p.perm();
 
 
-
-        }while (n!=-1);
+        } while (nn != -1);
     }
 
-    static String arrStr(int[] c){
-        /*String re = "[";
+    private void perm() {
 
-        for (int i =0; i <c.length; i++){
-            re += c[i] +",";
+        for (int i = 0, e = 0, o = 0; i <= max; i++) {
+            if (a[i] % 2 == 0) {
+                even[e++] = a[i];
+            } else {
+                odd[o++] = a[i];
+            }
+        } // Array in gerade und ungerade gesplittet
+        System.out.println("Gerade \t" + Arrays.toString(even) + "\nUngerade \t" + Arrays.toString(odd) + "\nA \t" + Arrays.toString(a));
+
+
+        int[] temp = new int[n];
+
+        for (int i = 0; i <= max; i++) {
+            //if ()
+            temp[i] = odd[i];
+
         }
-        re += "]";
-        return re;*/
-        return Arrays.toString(c);
+
+
     }
 
 
