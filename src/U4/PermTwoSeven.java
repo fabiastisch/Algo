@@ -1,6 +1,7 @@
 package U4;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Scanner;
@@ -20,6 +21,8 @@ import java.util.Scanner;
 public class PermTwoSeven {
     private int n;
     private int[] a, even, odd;
+    private ArrayList<int[]> evenL, oddL;
+
     ; // a Arbeitsarray
     private int max; // maximaler Index
     private boolean iseven;
@@ -67,7 +70,6 @@ public class PermTwoSeven {
             PermTwoSeven p = new PermTwoSeven(nn);
             p.perm();
 
-
         } while (nn != -1);
     }
 
@@ -81,7 +83,60 @@ public class PermTwoSeven {
             }
         } // Array in gerade und ungerade gesplittet
         System.out.println("Gerade \t" + Arrays.toString(even) + "\nUngerade \t" + Arrays.toString(odd) + "\nA \t" + Arrays.toString(a));
+        System.out.println("\n\n");
 
+        a = new int[]{1, 3, 5, 7};
+
+        permutationen(0, odd, true);
+        permutationen(0, even, false);
+
+
+    }
+
+    private void permutationen(int i, int[] aa, boolean iseven) {
+        int max = aa.length - 1;
+        if (i >= max) {
+            if (iseven) {
+                evenL.add(aa);
+            } else {
+                oddL.add(aa);
+            }
+        } else {
+            for (int j = i; j <= max; j++) { // jedes nach Vorne
+                aa = swap(i, j, aa); // vertauschen
+                permutationen(i + 1, aa, iseven); // und Rekursion
+            }
+            int h = aa[i]; // restauriere Array
+            System.arraycopy(aa, i + 1, aa, i, max - i); // shift links
+            aa[max] = h;
+        }
+    }
+
+    private int[] swap(int i, int j, int[] a) { // tausche a[i] <-> a[j]
+        if (i != j) {
+            int h = a[i];
+            a[i] = a[j];
+            a[j] = h;
+        }
+        return a;
+    } // end swap
+
+
+    private boolean gueltig() {
+
+        for (int j = 0; j < max; j++) {
+            int abs = Math.abs(a[j] - a[j + 1]);
+
+            if (abs != 2 && abs != 7) {
+                //System.out.println("Return false");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private void test() {
 
         int[] temp = new int[n];
 
@@ -89,11 +144,30 @@ public class PermTwoSeven {
             //if ()
             temp[i] = odd[i];
 
+
         }
+
+    /*private void backtracking(int pos, int[]ar){
+
+        while (noch nicht fertig){
+
+            if (ar[pos] % 2 == 0) { //falls gerade
+            }
+            if (gültig) {
+            }
+        }
+    }*/
+
+    /*
+     int[] temp = new int[n];
+
+        for (int i = 0; i <= max; i++) {
+            //if ()
+            temp[i] = odd[i];
+
+        }
+     */
 
 
     }
-
-
-
 }

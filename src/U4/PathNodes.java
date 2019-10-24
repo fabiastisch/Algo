@@ -25,7 +25,7 @@ public class PathNodes {
                 System.err.println("NumberFormatExeption");
             }
 
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i <= n; i++) {
 
                 BigInteger[] solution = nodes(n, 0, 0);
                 System.out.println("Für n = " + i + "\n Die Anzahl der verschiedenen Pfade betragen: \n\t " + solution[0]);
