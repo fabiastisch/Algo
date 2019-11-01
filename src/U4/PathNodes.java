@@ -10,9 +10,8 @@ import java.util.*;
  * Hinweis: Die Anzahl dieser Punkte fur ¨ n = 4 ist 28, fur ¨ n = 5 ist sie 152.
  */
 public class PathNodes {
-    static int n, i, summ;
+    static int n, i;
     static HashMap<String,BigInteger[]> memory = new HashMap<>();
-
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -25,27 +24,14 @@ public class PathNodes {
                 System.err.println("NumberFormatExeption");
             }
 
-            for (int i = 0; i <= n; i++) {
+            //   for (int i = 0; i <= n; i++) {
 
                 BigInteger[] solution = nodes(n, 0, 0);
                 System.out.println("Für n = " + i + "\n Die Anzahl der verschiedenen Pfade betragen: \n\t " + solution[0]);
                 System.out.println("Die Anzahl der summierten Punkte über sämtliche Pfade beträgt: \n\t " + solution[1]);
 
-
-            }
+            //   }
             System.out.println("\n\n\n END OF FILE");
-
-
-
-            /* Set<String> e;
-            Iterator it = memory.keySet().iterator();
-           for (BigInteger[] el : memory.values()){
-               System.out.println(it.next());
-               System.out.println(Arrays.toString(el));
-
-           }*/
-
-
 
         }while (n!=-1);
     }
@@ -65,8 +51,6 @@ public class PathNodes {
 
         BigInteger paths = BigInteger.ZERO;
         BigInteger nodes = BigInteger.ZERO;
-
-
 
         if (y - x < 0) {
             BigInteger[] left = nodes(x - 1, y, 1);
@@ -88,9 +72,7 @@ public class PathNodes {
 
         nodes = nodes.add(paths);
 
-
         memory.put(s, new BigInteger[]{paths, nodes});
-
 
         return new BigInteger[]{paths, nodes};
     }
