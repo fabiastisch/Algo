@@ -2,14 +2,18 @@ package U4;
 
 import java.math.BigInteger;
 import java.util.*;
-
 /**
- * Betrachten Sie wieder die Aufgabe 1 mit den Gitter-Pfaden vom zweiten Ubungsblatt. Schreiben Sie ¨
- * ein Programm PathNodes, das eine naturliche Zahl ¨ n einliest und dann die Gesamtanzahl aller
- * Punkte summiert uber s ¨ ¨amtliche Pfade von (0, 0) nach (n, 0) effizient bestimmt und ausgibt.
- * Hinweis: Die Anzahl dieser Punkte fur ¨ n = 4 ist 28, fur ¨ n = 5 ist sie 152.
+ * @author Fabian Weber , Robin Schlund, Julian Beitinger
+ *         202224       , 202961       , 202387
  */
+
 public class PathNodes {
+    /**
+     * Betrachten Sie wieder die Aufgabe 1 mit den Gitter-Pfaden vom zweiten Ubungsblatt. Schreiben Sie ¨
+     * ein Programm PathNodes, das eine naturliche Zahl ¨ n einliest und dann die Gesamtanzahl aller
+     * Punkte summiert uber s ¨ ¨amtliche Pfade von (0, 0) nach (n, 0) effizient bestimmt und ausgibt.
+     * Hinweis: Die Anzahl dieser Punkte fur ¨ n = 4 ist 28, fur ¨ n = 5 ist sie 152.
+     */
     static int n, i;
     static HashMap<String,BigInteger[]> memory = new HashMap<>();
 

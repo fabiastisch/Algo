@@ -1,141 +1,99 @@
 package U4;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * @author Fabian Weber , Robin Schlund, Julian Beitinger
+ * 202224       , 202961       , 202387
+ */
 public class PermTwoSeven {
+    /**
+     * Schreiben Sie ein Programm PermTwoSeven, das eine naturliche Zahl ¨ n einliest und dann
+     * (m¨oglichst schnell) alle Permutationen π der Zahlen {1, 2, . . . , n} in aufsteigender Reihenfolge
+     * auflistet, bei denen die absolute Differenz zweier direkt aufeinanderfolgender Zahlen genau 2 oder 7
+     * betr¨agt. Zum Schluss soll das Programm auch die Zahl der gefundenen Permutationen ausgeben.
+     * <p>
+     * Fur ¨ n = 8 soll die Ausgabe also etwa so aussehen:
+     * 2 4 6 8 1 3 5 7
+     * 7 5 3 1 8 6 4 2
+     * Es gab genau 2 Permutationen in {1,...,8} mit up-down in {2,7}
+     */
 
-    private int arraySize;            //User Input = n
-    private int amountOfPermutations; //Amount of permutations found for n
-    private int[] usedNumbers;      //Contains all numbers from 1..n that have already been used
-    private int[] possiblePermutation;//Current permutation
-
-    private int currentIndex;     //Index for possiblePermutation[]
-
-
-    public PermTwoSeven() {
-        amountOfPermutations = 0;
-        currentIndex = 1;
-    }
+    private static int n;
+    private static int permAnzahl = 0;
 
     public static void main(String[] args) {
-        PermTwoSeven pts = new PermTwoSeven();
-        pts.userInput();                            //Get n from User
-        pts.checkNTimes();                     //Start permutating
-    }
 
-    private void checkNTimes() {
-        for (int i = 1; i <= arraySize; i++) {      //Checks every beginning possible [1 ... n]
-            possiblePermutation = new int[arraySize]; //Create new array, n big
-            possiblePermutation[0] = i;               //Fill the first slot with i = 1 (starting value)
-            usedNumbers = new int[arraySize];
-            usedNumbers[0] = i;                       //Fill in the used starting number
+        Scanner scanner = new Scanner(System.in);
 
-            checkPermutations(i);
-        }
-        System.out.println("Es gab genau " + amountOfPermutations + " Permutationen");
-    }
-
-    private void checkPermutations(int i) {
-        if (foundPermutation()) {
-            amountOfPermutations++;
-            printSolution(possiblePermutation);
-        } else {
-            check2Higher(i);
-            check2Lower(i);
-            check7Higher(i);
-            check7Lower(i);
-        }
-
-    }
-
-    // -------------------------    Permutation logic ------------------
-
-    private void check2Higher(int i) {  //Checks i + 2
-        if (i + 2 <= arraySize && !alreadyUsed(i + 2)) {
-            possiblePermutation[currentIndex] = i + 2;
-            usedNumbers[currentIndex] = i + 2;
-            currentIndex++;
-            checkPermutations(i + 2);
-            currentIndex--;
-            usedNumbers[currentIndex] = 0;
-            possiblePermutation[currentIndex] = 0;
-        }
-    }
-
-    private void check2Lower(int i) {
-        if (i - 2 > 0 && !alreadyUsed(i - 2)) {
-            possiblePermutation[currentIndex] = i - 2;
-            usedNumbers[currentIndex] = i - 2;
-            currentIndex++;
-            checkPermutations(i - 2);
-            currentIndex--;
-            usedNumbers[currentIndex] = 0;
-            possiblePermutation[currentIndex] = 0;
-        }
-    }
-
-    private void check7Higher(int i) {
-        if (i + 7 <= arraySize && !alreadyUsed(i + 7)) {
-            possiblePermutation[currentIndex] = i + 7;
-            usedNumbers[currentIndex] = i + 7;
-            currentIndex++;
-            checkPermutations(i + 7);
-            currentIndex--;
-            usedNumbers[currentIndex] = 0;
-            possiblePermutation[currentIndex] = 0;
-        }
-    }
-
-    private void check7Lower(int i) {
-        if (i - 7 > 0 && !alreadyUsed(i - 7)) {
-            possiblePermutation[currentIndex] = i - 7;
-            usedNumbers[currentIndex] = i - 7;
-            currentIndex++;
-            checkPermutations(i - 7);
-            currentIndex--;
-            usedNumbers[currentIndex] = 0;
-            possiblePermutation[currentIndex] = 0;
-        }
-    }
-
-    private boolean alreadyUsed(int a) { //Takes the next number and check if it has been used before
-        for (int i = 0; i < arraySize; i++) {
-            if (a == usedNumbers[i]) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean foundPermutation() {
-        if (currentIndex == arraySize) {
-            return true;
-        }
-        return false;
-    }
-
-
-    // ----------------------  User Input, print a permutation -----------------
-
-    private void userInput() {
-        Scanner sc = new Scanner(System.in);
-
-
-        String s = "Bitte geben Sie eine ganze, positive Zahl ein größer als 0";
-        System.out.println(s);
+        System.out.println("Geben Sie eine positive Ganzzahl ein ... (Sinnvoll größer 7)");
         try {
-            arraySize = Integer.parseInt(sc.nextLine());
+            n = Integer.parseInt(scanner.nextLine());
         } catch (NumberFormatException e) {
-            arraySize = -1;
+            n = -1;
             System.err.println("NumberFormatExeption");
         }
+
+        for (int i = 1; i <= n; i++) {
+            int[] a = new int[n];
+            a[0] = i;
+            permutationen(a, 1);
+        }
+        System.out.println("Die Anzahl der gültigen Permutationen für " + n + " beträgt: " + permAnzahl);
     }
 
-    private void printSolution(int[] a) {   //prints an array of a possible permutation
-        for (int i = 0; i < a.length; i++) {
-            System.out.print(a[i] + ", ");
+    private static void permutationen(int[] array, int index) {
+        if (index == n) {
+            permAnzahl++;
+            System.out.println(Arrays.toString(array));
+        } else {
+            plus2(array.clone(), index);
+            minus2(array.clone(), index);
+            plus7(array.clone(), index);
+            minus7(array.clone(), index);
         }
-        System.out.print("]");
-        System.out.println();
+
+    }
+
+
+    private static void plus2(int[] i, int index) {
+        int value = i[index - 1] + 2;
+        if (value <= n && !intArrayContains(value, i)) {
+            i[index] = value;
+            permutationen(i, ++index);
+        }
+    }
+
+    private static void plus7(int[] i, int index) {
+        int value = i[index - 1] + 7;
+        if (value <= n && !intArrayContains(value, i)) {
+            i[index] = value;
+            permutationen(i, ++index);
+        }
+    }
+
+    private static void minus2(int[] i, int index) {
+        int value = i[index - 1] - 2;
+        if (value > 0 && !intArrayContains(value, i)) {
+            i[index] = value;
+            permutationen(i, ++index);
+        }
+    }
+
+    private static void minus7(int[] i, int index) {
+        int value = i[index - 1] - 7;
+        if (value > 0 && !intArrayContains(value, i)) {
+            i[index] = value;
+            permutationen(i, ++index);
+        }
+    }
+
+    private static boolean intArrayContains(int element, int[] array) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == element) return true;
+        }
+        return false;
     }
 }
+
