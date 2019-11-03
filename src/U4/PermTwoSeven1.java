@@ -25,10 +25,10 @@ public class PermTwoSeven1 {
 
         for (int i = 1; i <= n; i++) {
             int[] current = new int[n];
-            int[] used = new int[n];
+            // int[] used = new int[n];
             current[0] = i;
-            used[0] = i;
-            p(current, 1, used);
+            //  used[0] = i;
+            p(current, 1);
             /*curr = new int[n];
             curr[0] = i;*/
             //perm(i);
@@ -37,57 +37,55 @@ public class PermTwoSeven1 {
 
     }
 
-    private static void p(int[] array, int index, int[] used) {
+    private static void p(int[] array, int index) {
         if (index == n) {
             permAnzahl++;
             System.out.println(Arrays.toString(array));
         } else {
-            plus2(array, index, used);
-            plus7(array, index, used);
-            minus2(array, index, used);
-            minus7(array, index, used);
+            plus7(array, index);
+            plus2(array, index);
+            minus2(array, index);
+            minus7(array, index);
         }
 
     }
 
 
-    private static void plus2(int[] i, int index, int[] used) {
+    private static void plus2(int[] i, int index) {
         int value = i[index - 1] + 2;
-        if (value <= n && !intArrayContains(value, used)) {
-            used[index] = value;
+        if (value <= n && !intArrayContains(value, i)) {
+            //used[index] = value;
             i[index] = value;
-            p(i, ++index, used);
+            p(i, ++index);
         }
-
     }
 
-    private static void plus7(int[] i, int index, int[] used) {
+    private static void plus7(int[] i, int index) {
+        System.out.println("plus7");
         int value = i[index - 1] + 7;
-        if (value <= n && !intArrayContains(value, used)) {
-            used[index] = value;
+        if (value <= n && !intArrayContains(value, i)) {
+            //used[index] = value;
             i[index] = value;
-            p(i, ++index, used);
+            p(i, ++index);
         }
 
     }
 
-    private static void minus2(int[] i, int index, int[] used) {
+    private static void minus2(int[] i, int index) {
         int value = i[index - 1] - 2;
-        if (value > 0 && !intArrayContains(value, used)) {
-            used[index] = value;
+        if (value > 0 && !intArrayContains(value, i)) {
+            //used[index] = value;
             i[index] = value;
-            p(i, ++index, used);
-
+            p(i, ++index);
         }
     }
 
-    private static void minus7(int[] i, int index, int[] used) {
+    private static void minus7(int[] i, int index) {
         int value = i[index - 1] - 7;
-        if (value > 0 && !intArrayContains(value, used)) {
-            used[index] = value;
+        if (value > 0 && !intArrayContains(value, i)) {
+            //used[index] = value;
             i[index] = value;
-            p(i, ++index, used);
-
+            p(i, ++index);
         }
     }
 
