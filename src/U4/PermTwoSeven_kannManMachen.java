@@ -2,6 +2,9 @@ package U4;
 
 import java.util.Scanner;
 
+/**
+ *
+ */
 public class PermTwoSeven_kannManMachen {
 
     private int arraySize;            //User Input = n
