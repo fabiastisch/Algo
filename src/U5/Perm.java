@@ -1,5 +1,7 @@
 package U5;
 
+import java.util.Arrays;
+
 /**
  * @author Heinz
  * @Quelle Vorlesung
@@ -26,6 +28,7 @@ class Perm extends Thread {
 
     private void perm(int i) { // permutiere ab Index i
         ++permAnzahl;
+        //System.out.println(Arrays.toString(a));
         if (i >= max) put(); // eine Permutation fertig
         else {
             for (int j = i; j <= max; j++) { // jedes nach Vorne
