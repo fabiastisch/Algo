@@ -1,22 +1,14 @@
 package U5;
 
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Stack;
 
 public class KorrektGeklammertenKlammerausdruecke {
     static int n;
-    /*static Stack<Klammerart> stack;
-    static Klammerart[] used = new Klammerart[3];*/
+    static int i = 0, j = 0;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-/*
-        Stack<Klammerart> s = new Stack<>();
-        s.push(Klammerart.RUND_AUF);
-
-        System.out.println( gehtZu(Klammerart.RUND_AUF,s));*/
-
 
         while (true) {
             System.out.println("Geben Sie eine Zahl ein");
@@ -31,21 +23,10 @@ public class KorrektGeklammertenKlammerausdruecke {
         }
     }
 
-    static int i = 0, j = 0;
-
     public static int b(int n, Stack<Klammerart> stack, Klammerart[] used) {
-        /*if (n==0){
-            System.out.println(++i);
-            System.out.println(stack);
-        }
-        if (stack.isEmpty()) System.out.println("Stack:"+ ++j);
-*/
         if (n == 0 && stack.isEmpty()) {
-            // System.out.println(stack);
-            //System.out.println(Arrays.toString(used));
             return 1;
         }
-
         if (n >= 0) {
             int erg = 0;
 
@@ -108,7 +89,6 @@ public class KorrektGeklammertenKlammerausdruecke {
         return b(n - 1, stack, used);
     }
 
-
     enum Klammerart {
         RUND_AUF,
         ECKIG_AUF,
@@ -118,7 +98,4 @@ public class KorrektGeklammertenKlammerausdruecke {
         GESCHWEIFT_ZU;
     }
 
-
 }
-
-
