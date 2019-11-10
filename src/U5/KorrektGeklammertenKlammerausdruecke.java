@@ -1,11 +1,13 @@
 package U5;
 
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Stack;
 
 public class KorrektGeklammertenKlammerausdruecke {
     static int n;
     static int i = 0, j = 0;
+    static HashMap<String, Integer> map = new HashMap<>();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -24,6 +26,9 @@ public class KorrektGeklammertenKlammerausdruecke {
     }
 
     public static int b(int n, Stack<Klammerart> stack, Klammerart[] used) {
+        if (inSpeicher(n, stack)) {
+            return map.get("" + n + "|" + stack);
+        }
         if (n == 0 && stack.isEmpty()) {
             return 1;
         }
@@ -57,10 +62,14 @@ public class KorrektGeklammertenKlammerausdruecke {
                 erg += b(n, a, used);
             }
 
-
+            map.put("" + n + "|" + stack, erg);
             return erg;
         }
         return 0;
+    }
+
+    private static boolean inSpeicher(int n, Stack<Klammerart> stack) {
+        return map.containsKey("" + n + "|" + stack);
     }
 
     public static boolean gehtZu(Klammerart klammerart, Stack<Klammerart> stack) {
