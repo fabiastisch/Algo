@@ -23,6 +23,9 @@ public class DLXPentominoDLUX {
                 System.err.println("NumberFormatExeption");
             }
 
+            createBoard(new int[n][7]);
+            search(0);
+            System.out.println(cnt);
 
         }
     }
@@ -31,15 +34,15 @@ public class DLXPentominoDLUX {
         final int COLS = board[0].length;
         final int ROWS = board.length;
 
-        Column headerNode = new Column("header");
+        header = new Column("header");
         ArrayList<Column> columnNodes = new ArrayList<Column>();
 
         for (int i = 0; i < COLS; i++) {
             Column column = new Column(Integer.toString(i));
             columnNodes.add(column);
-            headerNode = (Column) headerNode.hookRight(column);
+            header = (Column) header.hookRight(column);
         }
-        headerNode = headerNode.R.C;
+        header = header.R.C;
 
         for (int i = 0; i < ROWS; i++) {
             DLXNode prev = null;
@@ -56,7 +59,7 @@ public class DLXPentominoDLUX {
             }
         }
 
-        headerNode.size = COLS;
+        header.size = COLS;
 
         //return headerNode;
     }

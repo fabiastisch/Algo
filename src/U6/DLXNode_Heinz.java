@@ -15,6 +15,7 @@ class DLXNode_Heinz {       // represents 1 element or header
     DLXNode_Heinz C;           // reference to column-header
     DLXNode_Heinz L, R, U, D;  // left, right, up, down references
 
+
     DLXNode_Heinz() {
         C = L = R = U = D = this;
     } // supports circular lists
@@ -28,7 +29,7 @@ class DLXNode_Heinz {       // represents 1 element or header
      *
      * @param int k: number of level
      */
-    public static void search(int k) { // finds & counts solutions
+   /* public static void search(int k) { // finds & counts solutions
         if (h.R == h) {
             cnt++;
             return;
@@ -43,7 +44,7 @@ class DLXNode_Heinz {       // represents 1 element or header
                 uncover(j.C);                  // backtrack: un-remove
         }
         uncover(c);                        // un-remove c to columns
-    }
+    }*/
 
     /**
      * cover "covers" a column c of the DLX matrix
@@ -52,7 +53,7 @@ class DLXNode_Heinz {       // represents 1 element or header
      * in other column lists than c
      * so column c and rows i are invisible after execution of cover
      *
-     * @param DLXNode c: header element of column that has to be covered
+     * @param //DLXNode c: header element of column that has to be covered
      */
     public static void cover(DLXNode_Heinz c) { // remove column c
         c.R.L = c.L;                         // remove header
@@ -69,7 +70,7 @@ class DLXNode_Heinz {       // represents 1 element or header
      * all operations of cover are undone
      * so column c and rows i are visible again after execution of uncover
      *
-     * @param DLXNode c: header element of column that has to be uncovered
+     * @param //DLXNode c: header element of column that has to be uncovered
      */
     public static void uncover(DLXNode_Heinz c) {//undo remove col c
         for (DLXNode_Heinz i = c.U; i != c; i = i.U)      // forall rows with 1
