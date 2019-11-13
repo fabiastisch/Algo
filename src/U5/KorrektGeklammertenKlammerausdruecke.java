@@ -6,7 +6,7 @@ import java.util.Stack;
 
 public class KorrektGeklammertenKlammerausdruecke {
     static int n;
-    static int i = 0, j = 0;
+
     static HashMap<String, Integer> map = new HashMap<>();
 
     public static void main(String[] args) {
@@ -35,16 +35,18 @@ public class KorrektGeklammertenKlammerausdruecke {
         if (n >= 0) {
             int erg = 0;
 
-            erg += push(Klammerart.RUND_AUF, (Stack<Klammerart>) stack.clone(), used.clone(), n);
+            if (n > 0) {
+                erg += push(Klammerart.RUND_AUF, (Stack<Klammerart>) stack.clone(), used.clone(), n);
 
 
-            if (isUseable(Klammerart.ECKIG_AUF, used)) {
-                // System.out.println("Eckig");
-                erg += push(Klammerart.ECKIG_AUF, (Stack<Klammerart>) stack.clone(), used.clone(), n);
-            }
-            if (isUseable(Klammerart.GESCHWEIFT_AUF, used)) {
-                //System.out.println("Rund");
-                erg += push(Klammerart.GESCHWEIFT_AUF, (Stack<Klammerart>) stack.clone(), used.clone(), n);
+                if (isUseable(Klammerart.ECKIG_AUF, used)) {
+                    // System.out.println("Eckig");
+                    erg += push(Klammerart.ECKIG_AUF, (Stack<Klammerart>) stack.clone(), used.clone(), n);
+                }
+                if (isUseable(Klammerart.GESCHWEIFT_AUF, used)) {
+                    //System.out.println("Rund");
+                    erg += push(Klammerart.GESCHWEIFT_AUF, (Stack<Klammerart>) stack.clone(), used.clone(), n);
+                }
             }
             if (gehtZu(Klammerart.RUND_AUF, stack)) {
                 Stack<Klammerart> a = ((Stack<Klammerart>) stack.clone());

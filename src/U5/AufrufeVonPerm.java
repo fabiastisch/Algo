@@ -1,6 +1,8 @@
 package U5;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.Scanner;
 
 public class AufrufeVonPerm {
@@ -23,14 +25,18 @@ public class AufrufeVonPerm {
             BigInteger fak = fak(n);
             System.out.println(t);
             System.out.println(fak);
-            System.out.println("\n" + t.divide(fak));
+
+            BigDecimal a = new BigDecimal(t);
+            BigDecimal f = new BigDecimal(fak);
+            System.out.println("\n" + a.divide(f, 101, RoundingMode.HALF_EVEN));
+
 
         }
     }
 
     static BigInteger fak(int n) {
         if (n == 0) return BigInteger.ONE;
-        BigInteger ergebnis = BigInteger.ZERO;
+        BigInteger ergebnis = BigInteger.ONE;
         for (int i = 1; i <= n; i++) {
             ergebnis = ergebnis.multiply(BigInteger.valueOf(i));
         }
@@ -38,12 +44,14 @@ public class AufrufeVonPerm {
     }
 
     static BigInteger a(int n) {
+
         if (n == 0) {
             return BigInteger.ZERO;
         }
         //int temp = n*a(n-1)+1;
 
         BigInteger temp = BigInteger.valueOf(n).multiply(a(n - 1)).add(BigInteger.ONE);
+
 
         return temp;
     }
