@@ -21,7 +21,6 @@ public class DLXPentominoDLUXv2 {
   }
 
   private int[][] createMatix() {
-    int col = n * 7;
 
     int[][] d = getDomino();
     int[][] l = getL();
@@ -66,7 +65,7 @@ public class DLXPentominoDLUXv2 {
       //printArray(a);
       //System.out.println(a.length); == n*5
     }
-      return a;
+    return a;
 
 
   }
@@ -415,26 +414,19 @@ public class DLXPentominoDLUXv2 {
         {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1}
     };
 
-
     int m = 13 * n - 7;
     int[][] a = new int[m][col];
-
 
     for (int i = 0; i < n * 13 - 7; i++) {
       for (int col = 0; col < this.col; col++) {
         if (i < n * 6) {
-
           if (col >= i / 6 * 7 && col < (i / 6 + 1) * 7) {
             a[i][col] = dominoW[i % 6][col % 7];
           }
-
         } else {
-          // if (i - n * 6 < 7) {
-
           if (col >= ((i - n * 6) / 7) * 7 && col < ((i - n * 6) / 7 + 2) * 7) {
             a[i][col] = dominoS[(i - n * 6) % 7][col % 14];
           }
-          //   }
         }
       }
     }
@@ -472,10 +464,8 @@ public class DLXPentominoDLUXv2 {
             } else {
               m[i][j] = b[i - a.length][j];
             }
-
           }
         }
-
         return m;
       }
     }
