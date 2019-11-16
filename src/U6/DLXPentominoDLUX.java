@@ -23,7 +23,7 @@ public class DLXPentominoDLUX {
                 System.err.println("NumberFormatExeption");
             }
 
-            createBoard(new int[n][7]);
+
             search(0);
             System.out.println(cnt);
 
