@@ -1,4 +1,5 @@
 package U6;
+/*
 
 public class DLXNode {
     DLXNode L, R, U, D;
@@ -49,6 +50,5 @@ public class DLXNode {
     void relinkUD() {
         this.U.D = this.D.U = this;
     }
-
-
 }
+*/

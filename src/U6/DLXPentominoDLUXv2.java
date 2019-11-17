@@ -1,23 +1,24 @@
 package U6;
 
 import java.util.Scanner;
+/*
 
-public class DLXPentominoDLUXv2 {
+public class DLXPentominoDLUX {
   int n = 0;
   int col;
   int[][] mat;
 
 
-  public DLXPentominoDLUXv2(int n) {
+  public DLXPentominoDLUX(int n) {
     this.n = n;
     this.col = n * 7;
     this.mat = createMatix();
 
 
-    DLXPentominoDLUX.createBoard(mat);
-    DLXPentominoDLUX.search(0);
+    DLX.createBoard(mat);
+    DLX.search(0);
 
-    System.out.println(DLXPentominoDLUX.cnt);
+    System.out.println(DLX.cnt);
   }
 
   private int[][] createMatix() {
@@ -27,7 +28,9 @@ public class DLXPentominoDLUXv2 {
     int[][] u = getU();
     int[][] x = getX();
 
+
     int[][] aa = matrixAdd(matrixAdd(d, l), matrixAdd(u, x));
+    printArray(aa);
     return aa;
   }
 
@@ -438,9 +441,10 @@ public class DLXPentominoDLUXv2 {
 
   private void printArray(int[][] array) {
     StringBuilder s = new StringBuilder();
+    int cnt = 1;
 
     for (int i = 0; i < array.length; i++) {
-      s.append(" " + i + "[");
+      s.append(" " + cnt + "[");
       for (int j = 0; j < array[i].length; j++) {
         s.append(array[i][j]);
         if (j != array[i].length - 1) {
@@ -448,6 +452,7 @@ public class DLXPentominoDLUXv2 {
         }
       }
       s.append("]\n");
+      cnt++;
     }
     System.out.println(s);
   }
@@ -486,10 +491,11 @@ public class DLXPentominoDLUXv2 {
         System.err.println("NumberFormatExeption");
       }
 
-      new DLXPentominoDLUXv2(n);
+      new DLXPentominoDLUX(n);
 
 
     }
   }
 
 }
+*/

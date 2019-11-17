@@ -1,4 +1,5 @@
 package U6;
+/*
 
 public class Column extends DLXNode {
     int size; // number of ones in current column
@@ -32,4 +33,4 @@ public class Column extends DLXNode {
         relinkLR();
         // header.size++; // not part of original
     }
-}
+}*/
