@@ -35,8 +35,10 @@ public class DLXPentominoDLUX {
         this.col = n * 7;
         this.mat = createMatix();
 
+        printArray(mat);
 
         DLX.createBoard(mat);
+        System.out.println("Board fertig");
         DLX.search(0);
 
         System.out.println(DLX.cnt);
@@ -86,7 +88,8 @@ public class DLXPentominoDLUX {
                     }
                 }
             }
-            //printArray(a);
+            //  System.out.println("X:\n");
+            //  printArray(a);
             //System.out.println(a.length); == n*5
         }
         return a;
@@ -143,6 +146,8 @@ public class DLXPentominoDLUX {
                 }
             }
         }
+        // System.out.println("U:\n");
+        // printArray(a);
         int[][] ab = new int[n * 5 - 5][col];
         int cd;
         for (int i = 0; i < n * 5 - 5; i++) { // U
@@ -160,6 +165,8 @@ public class DLXPentominoDLUX {
                 }
             }
         }
+        //System.out.println("UxGesp:\n");
+        //  printArray(ab);
         int[][] abc = new int[0][7];
         int[][] abcd = new int[0][7];
         if (n >= 3) {
@@ -180,6 +187,9 @@ public class DLXPentominoDLUX {
                     }
                 }
             }
+            //   System.out.println("UImUhrezeigersinn:\n");
+            //   printArray(abc);
+
             abcd = new int[n * 6 - 12][col];
             int cdef;
             for (int i = 0; i < n * 6 - 12; i++) { // U
@@ -198,7 +208,8 @@ public class DLXPentominoDLUX {
                 }
             }
         }
-
+        //  System.out.println("UgegenUhrzeigersinn:\n");
+        //  printArray(abcd);
         int[][] l = matrixAdd(matrixAdd(a, ab), matrixAdd(abc, abcd));
         //printArray(l);
 
@@ -210,6 +221,7 @@ public class DLXPentominoDLUX {
         //   1,2,3,4,5,6,7,8,9,1,1,2,3,4,5,6,7,8,9,2,1,2,3,4,5,6,7,8
         //  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
         int[][] l = {
+
                 {1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0},
                 {0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0},
                 {0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0},
@@ -270,7 +282,7 @@ public class DLXPentominoDLUX {
         if (n >= 4) {
             int[][] a = new int[n * 6 - 18][col];
             int c;
-            for (int i = 0; i < n * 6 - 18; i++) { // U
+            for (int i = 0; i < n * 6 - 18; i++) {
                 for (int col = 0; col < this.col; col++) {
                     c = col;
                     if (col >= (i / 6) * 7 && col < (i / 6 + 4) * 7) {
@@ -285,9 +297,11 @@ public class DLXPentominoDLUX {
                     }
                 }
             }
+            //   System.out.println("L:\n");
+            //   printArray(a);
             int[][] ab = new int[n * 6 - 18][col];
             int cd;
-            for (int i = 0; i < n * 6 - 18; i++) { // U
+            for (int i = 0; i < n * 6 - 18; i++) {
                 for (int col = 0; col < this.col; col++) {
                     cd = col;
                     if (col >= (i / 6) * 7 && col < (i / 6 + 4) * 7) {
@@ -302,9 +316,11 @@ public class DLXPentominoDLUX {
                     }
                 }
             }
+            //   System.out.println("LyGesp:\n");
+            //  printArray(ab);
             int[][] abc = new int[n * 6 - 18][col];
             int cde;
-            for (int i = 0; i < n * 6 - 18; i++) { // U
+            for (int i = 0; i < n * 6 - 18; i++) {
                 for (int col = 0; col < this.col; col++) {
                     cde = col;
                     if (col >= (i / 6) * 7 && col < (i / 6 + 4) * 7) {
@@ -319,9 +335,11 @@ public class DLXPentominoDLUX {
                     }
                 }
             }
+            //  System.out.println("LXgesp:\n");
+            // printArray(abc);
             int[][] abcd = new int[n * 6 - 18][col];
             int cdef;
-            for (int i = 0; i < n * 6 - 18; i++) { // U
+            for (int i = 0; i < n * 6 - 18; i++) {
                 for (int col = 0; col < this.col; col++) {
                     cdef = col;
                     if (col >= (i / 6) * 7 && col < (i / 6 + 4) * 7) {
@@ -336,11 +354,14 @@ public class DLXPentominoDLUX {
                     }
                 }
             }
+            //   System.out.println("LXYGesp:\n");
+            //    printArray(abcd);
+
             erg = matrixAdd(matrixAdd(a, ab), matrixAdd(abc, abcd));
         } // N > 4 !!!! darunter frei
         int[][] bd = new int[n * 4 - 4][col];
         int ca;
-        for (int i = 0; i < n * 4 - 4; i++) { // U
+        for (int i = 0; i < n * 4 - 4; i++) {
             for (int col = 0; col < this.col; col++) {
                 ca = col;
                 if (col >= (i / 4) * 7 && col < (i / 4 + 2) * 7) {
@@ -355,9 +376,11 @@ public class DLXPentominoDLUX {
                 }
             }
         }
+        //  System.out.println("LimUhrzeigersinn:\n");
+        //  printArray(bd);
         int[][] bde = new int[n * 4 - 4][col];
         int cab;
-        for (int i = 0; i < n * 4 - 4; i++) { // U
+        for (int i = 0; i < n * 4 - 4; i++) {
             for (int col = 0; col < this.col; col++) {
                 cab = col;
                 if (col >= (i / 4) * 7 && col < (i / 4 + 2) * 7) {
@@ -372,9 +395,11 @@ public class DLXPentominoDLUX {
                 }
             }
         }
+        // System.out.println("LimUhrzeigersinn Xgesp:\n");
+        // printArray(bde);
         int[][] bdef = new int[n * 4 - 4][col];
         int ea;
-        for (int i = 0; i < n * 4 - 4; i++) { // U
+        for (int i = 0; i < n * 4 - 4; i++) {
             for (int col = 0; col < this.col; col++) {
                 ea = col;
                 if (col >= (i / 4) * 7 && col < (i / 4 + 2) * 7) {
@@ -389,9 +414,11 @@ public class DLXPentominoDLUX {
                 }
             }
         }
+        //System.out.println("LgegenUhr:\n");
+        // printArray(bdef);
         int[][] bdefg = new int[n * 4 - 4][col];
         int aas;
-        for (int i = 0; i < n * 4 - 4; i++) { // U
+        for (int i = 0; i < n * 4 - 4; i++) {
             for (int col = 0; col < this.col; col++) {
                 aas = col;
                 if (col >= (i / 4) * 7 && col < (i / 4 + 2) * 7) {
@@ -406,6 +433,8 @@ public class DLXPentominoDLUX {
                 }
             }
         }
+        //System.out.println("LgegenUhr x gesp:\n");
+        //printArray(bdefg);
         int[][] s = matrixAdd(matrixAdd(bd, bde), matrixAdd(bdef, bdefg));
 
         if (n >= 4) {
@@ -421,7 +450,7 @@ public class DLXPentominoDLUX {
 
     private int[][] getDomino() { // liefert das Exact Cover problem für das Feld n*7, nur mit Dominos zu füllen
         int[][] dominoW = {
-                {1, 1, 0, 0, 0, 0, 0},
+                {1, 1, 0, 0, 0, 0, 0}, // TODO:
                 {0, 1, 1, 0, 0, 0, 0},
                 {0, 0, 1, 1, 0, 0, 0},
                 {0, 0, 0, 1, 1, 0, 0},
@@ -454,8 +483,8 @@ public class DLXPentominoDLUX {
                 }
             }
         }
-
-        //printArray(a);
+        //  System.out.println("D:\n");
+        //  printArray(a);
 
         return a;
     }
@@ -512,7 +541,7 @@ public class DLXPentominoDLUX {
                 return m;
             }
         }
-        return new int[1][1];
+        return new int[0][0];
     }
 
     public static void main(String[] args) {
@@ -563,31 +592,25 @@ class DLXNode {
     }
 
     void unlinkLR() {
-        this.L.R = this.R;
         this.R.L = this.L;
+        this.L.R = this.R;
     }
 
-    void relinkLR() {
-        this.L.R = this.R.L = this;
+    void relinkUD() {
+        this.U.D = this.D.U = this;
     }
 
     void unlinkUD() {
         this.U.D = this.D;
         this.D.U = this.U;
     }
-
-    void relinkUD() {
-        this.U.D = this.D.U = this;
-    }
 }
 
 class Column extends DLXNode {
-    int size; // # der Nodes unterhalb
     String name;
 
     public Column(String n) {
         super();
-        size = 0;
         name = n;
         C = this;
     }
@@ -595,33 +618,31 @@ class Column extends DLXNode {
     void cover() {
         unlinkLR();
         for (DLXNode i = this.D; i != this; i = i.D) {
-            for (DLXNode j = i.R; j != i; j = j.R) {
+            for (DLXNode j = i.R; i != j; j = j.R) {
                 j.unlinkUD();
-                j.C.size--;
             }
         }
     }
 
     void uncover() {
         for (DLXNode i = this.U; i != this; i = i.U) {
-            for (DLXNode j = i.L; j != i; j = j.L) {
-                j.C.size++;
+            for (DLXNode j = i.L; i != j; j = j.L) {
                 j.relinkUD();
             }
         }
-        relinkLR();
+        this.L.R = this.R.L = this;
     }
 }
 
 class DLX {
     static Column header;
     static int cnt = 0;
-    static int n;
 
 
     public static void createBoard(int[][] board) {
         int spalten = board[0].length;
         int reihen = board.length;
+
 
         header = new Column("header");
         ArrayList<Column> columnNodes = new ArrayList<Column>();
@@ -630,6 +651,7 @@ class DLX {
             Column column = new Column(Integer.toString(i));
             columnNodes.add(column);
             header = (Column) header.nodenachrechts(column);
+
         }
         header = header.R.C;
 
@@ -643,26 +665,25 @@ class DLX {
                         prev = newNode;
                     col.U.nodenachunten(newNode);
                     prev = prev.nodenachrechts(newNode);
-                    col.size++;
+
                 }
             }
         }
-
-        header.size = spalten;
-        //System.out.println("Matrix fertig");
-
-
     }
 
     public static void search(int k) { // finds & counts solutions
+
         if (header.R == header) {
             cnt++;
             return;
         }     // if empty: count & done
         Column c = (Column) header.R;
         // choose next column c
+
         c.cover();                     // remove c from columns
+
         for (DLXNode r = c.D; r != c; r = r.D) {  // forall rows with 1 in c
+
             for (DLXNode j = r.R; j != r; j = j.R) // forall 1-elements in row
                 j.C.cover();                    // remove column
             search(k + 1);                    // recursion
