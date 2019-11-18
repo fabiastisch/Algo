@@ -55,7 +55,7 @@ public class DLXPentominoDLUX {
         return aa;
     }
 
-    private int[][] getX() {
+    private int[][] getX() { // liefert das Exact Cover problem für das Feld n*7, nur mit X-Pentominos zu füllen
         int[][] a = new int[0][7];
         if (n >= 3) {
             int[][] x = {
@@ -94,7 +94,7 @@ public class DLXPentominoDLUX {
 
     }
 
-    private int[][] getU() {
+    private int[][] getU() {// liefert das Exact Cover problem für das Feld n*7, nur mit U-Pentominos zu füllen
         int[][] u = {
                 {1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0},
                 {0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0},
@@ -205,7 +205,7 @@ public class DLXPentominoDLUX {
         return l;
     }
 
-    private int[][] getL() {
+    private int[][] getL() { // liefert das Exact Cover problem für das Feld n*7, nur mit L-Pentominos zu füllen
         //  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
         //   1,2,3,4,5,6,7,8,9,1,1,2,3,4,5,6,7,8,9,2,1,2,3,4,5,6,7,8
         //  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -419,7 +419,7 @@ public class DLXPentominoDLUX {
         return erg;
     }
 
-    private int[][] getDomino() {
+    private int[][] getDomino() { // liefert das Exact Cover problem für das Feld n*7, nur mit Dominos zu füllen
         int[][] dominoW = {
                 {1, 1, 0, 0, 0, 0, 0},
                 {0, 1, 1, 0, 0, 0, 0},
@@ -460,7 +460,7 @@ public class DLXPentominoDLUX {
         return a;
     }
 
-    private void printArray(int[][] array) {
+    private void printArray(int[][] array) { // Nur zum Testen...
         StringBuilder s = new StringBuilder();
         int cnt = 1;
 
@@ -478,7 +478,15 @@ public class DLXPentominoDLUX {
         System.out.println(s);
     }
 
-    private int[][] matrixAdd(int[][] a, int[][] b) {
+    private int[][] matrixAdd(int[][] a, int[][] b) { // Setzt die int Arrays untereinander
+        /*
+        |20,21,22,23,24,25,26 |
+        +
+        |10,11,12,13,14,15,16 |
+        =
+        |20,21,22,23,24,25,26 |
+        |10,11,12,13,14,15,16 |
+         */
         if (a.length == 0 && b.length == 0) {
             return new int[0][0];
         }
@@ -536,23 +544,22 @@ class DLXNode {
         C = c;
     }
 
-    // hooks node n1 `below` current node
-    DLXNode hookDown(DLXNode n1) {
-        assert (this.C == n1.C);
-        n1.D = this.D;
-        n1.D.U = n1;
-        n1.U = this;
-        this.D = n1;
-        return n1;
+    // Node unterhalb von dieser(this) verlinken
+    DLXNode nodenachunten(DLXNode n) {
+        n.D = this.D;
+        n.D.U = n;
+        n.U = this;
+        this.D = n;
+        return n;
     }
 
-    // hooke a node n1 to the right of `this` node
-    DLXNode hookRight(DLXNode n1) {
-        n1.R = this.R;
-        n1.R.L = n1;
-        n1.L = this;
-        this.R = n1;
-        return n1;
+    // Node rechts von dieser(this) verlinkn
+    DLXNode nodenachrechts(DLXNode n) {
+        n.R = this.R;
+        n.R.L = n;
+        n.L = this;
+        this.R = n;
+        return n;
     }
 
     void unlinkLR() {
@@ -575,7 +582,7 @@ class DLXNode {
 }
 
 class Column extends DLXNode {
-    int size; // number of ones in current column
+    int size; // # der Nodes unterhalb
     String name;
 
     public Column(String n) {
@@ -593,7 +600,6 @@ class Column extends DLXNode {
                 j.C.size--;
             }
         }
-        //header.size--; // not part of original
     }
 
     void uncover() {
@@ -604,7 +610,6 @@ class Column extends DLXNode {
             }
         }
         relinkLR();
-        // header.size++; // not part of original
     }
 }
 
@@ -615,35 +620,35 @@ class DLX {
 
 
     public static void createBoard(int[][] board) {
-        final int COLS = board[0].length;
-        final int ROWS = board.length;
+        int spalten = board[0].length;
+        int reihen = board.length;
 
         header = new Column("header");
         ArrayList<Column> columnNodes = new ArrayList<Column>();
 
-        for (int i = 0; i < COLS; i++) {
+        for (int i = 0; i < spalten; i++) {
             Column column = new Column(Integer.toString(i));
             columnNodes.add(column);
-            header = (Column) header.hookRight(column);
+            header = (Column) header.nodenachrechts(column);
         }
         header = header.R.C;
 
-        for (int i = 0; i < ROWS; i++) {
+        for (int i = 0; i < reihen; i++) {
             DLXNode prev = null;
-            for (int j = 0; j < COLS; j++) {
-                if (board[i][j] == 1) { // atm immer flase, da ein leeres Brett erstellt wird
+            for (int j = 0; j < spalten; j++) {
+                if (board[i][j] == 1) { // Wenn in der Matrix eine 1 an dem Index ist, wird eine neue node erstellt.
                     Column col = columnNodes.get(j);
                     DLXNode newNode = new DLXNode(col);
                     if (prev == null)
                         prev = newNode;
-                    col.U.hookDown(newNode);
-                    prev = prev.hookRight(newNode);
+                    col.U.nodenachunten(newNode);
+                    prev = prev.nodenachrechts(newNode);
                     col.size++;
                 }
             }
         }
 
-        header.size = COLS;
+        header.size = spalten;
         //System.out.println("Matrix fertig");
 
 
