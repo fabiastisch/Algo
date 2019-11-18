@@ -38,7 +38,6 @@ public class DLXPentominoDLUX {
         printArray(mat);
 
         DLX.createBoard(mat);
-        System.out.println("Board fertig");
         DLX.search(0);
 
         System.out.println(DLX.cnt);
