@@ -5,6 +5,11 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Scanner;
 
+/**
+ * @author Fabian Weber , Robin Schlund, Julian Beitinger
+ * 202224       , 202961       , 202387
+ */
+
 public class QuadSort {
     static int ausgabenZahl = 0;
     static int[] max;
