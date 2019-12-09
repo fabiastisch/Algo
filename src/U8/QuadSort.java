@@ -1,4 +1,4 @@
-package U7;
+package U8;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,8 +20,9 @@ public class QuadSort {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String s;
-        System.out.println("Geben Sie Die Literangaben für A,B,C,D ein. Trennen Sie mit \",\" ");
-        s = scanner.nextLine();
+        System.out.println("Geben Sie Die Maximalen Literangaben für die Kanister A,B,C,D ein. Trennen Sie mit \",\" " +
+                "\n bsp: 4,1,3,1");
+        s = scanner.nextLine().trim();
 
         int prev = 0;
         int[] a = new int[4];
@@ -99,7 +100,7 @@ public class QuadSort {
         intList.add(a);
         ausgabenZahl++;
 
-        // 1 -> 2
+        // 1 --> 2
         if (a[0] != 0 && a[1] < max[1]) {
             int[] b = a.clone();
             while (b[0] != 0 && b[1] < max[1]) {
@@ -112,7 +113,7 @@ public class QuadSort {
 
         }
 
-        // 1 -> 3
+        // 1 --> 3
         if (a[0] != 0 && a[2] < max[2]) {
             int[] b = a.clone();
             while (b[0] != 0 && b[2] < max[2]) {
@@ -124,7 +125,7 @@ public class QuadSort {
             }
         }
 
-        // 2 -> 4
+        // 2 --> 4
         if (a[1] != 0 && a[3] < max[3]) {
             int[] b = a.clone();
             while (b[1] != 0 && b[3] < max[3]) {
@@ -136,7 +137,7 @@ public class QuadSort {
             }
         }
 
-        // 3 -> 4
+        // 3 --> 4
         if (a[2] != 0 && a[3] < max[3]) {
             int[] b = a.clone();
             while (b[2] != 0 && b[3] < max[3]) {
@@ -149,7 +150,7 @@ public class QuadSort {
 
         }
 
-        // 3 -> 1
+        // 3 --> 1
         if (a[2] != 0 && a[1] < max[1] | !threeInOne) {
             int[] b = a.clone();
             while (b[2] != 0 && b[0] < max[0]) {
